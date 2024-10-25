@@ -10,12 +10,12 @@ struct VectorInt
 
     int& operator[](int i)
     {
-         return *(pBegin + i);
+        return *(pBegin + i);
     }
 
     int size()
     {
-        return pEnd - pBegin;
+        return static_cast<int>(pEnd - pBegin);
     }
 
     void pushBack(int value)
@@ -56,7 +56,20 @@ struct VectorInt
     int* pEnd;
     int* pCapacity;
 };
+std::ostream& operator << (std::ostream& s, const VectorInt& v)
+{
+    std::cout << "[";
+    for (int *i = v.pBegin; i < v.pEnd; ++i)
+    {
 
+        s << *i;
+        if (i != v.pEnd - 1)
+            s << ", ";
+
+    }
+    std::cout << "]";
+    return s;
+}
 
 
 int main()
@@ -68,8 +81,12 @@ int main()
 
     v.pushBack(2);
     std::cout << v[0] << std::endl;
-
-    //std::cout << v << std::endl;
+    std::cout << v << std::endl;
+    
+    std::cout << typeid(std::cout).name();
+  /*  std::cout << std::endl;
+    auto titi = &v.pBegin;
+    std::cout << typeid(titi).name()*/;
 
     return 0;
 }
